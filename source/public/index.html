@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index Page</title>
+        <style>
+            p {
+                font-size: 2em;
+            }
+
+            button {
+                width: 100px;
+                margin-bottom: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Login Successful</h1>
+        <button id="post" onclick="postBtnOnClick()">POST</button>
+        <input type="text" id="post-path" placeholder="Path to POST" value="/index/items/1/1">
+        <br>
+        <button id="put" onclick="putBtnOnClick()">PUT</button>
+        <input type="text" id="put-path" placeholder="Path to PUT" value="/index/items/1/1">
+        <br>
+        <button id="delete" onclick="deleteBtnOnClick()">DELETE</button>
+        <input type="text" id="delete-path" placeholder="Path to DELETE" value="/index/items/1">
+        <br>
+        <p>Item 2 = 1</p>
+        <p>Item 3 = 3</p>
+        <p>Item 4 = 4</p>
+        <p>Item 5 = 5</p>
+
+        <script>
+            let postBtnOnClick = () => {
+                let post_path = document.getElementById("post-path").value;
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", post_path);
+                xhr.send();
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        alert('POST Succeeded');
+                        window.location.reload();
+                    }
+                    else alert('POST failed with status code: ' + xhr.status);
+                }
+            }
+
+            let putBtnOnClick = () => {
+                let put_path = document.getElementById("put-path").value;
+                let xhr = new XMLHttpRequest();
+                xhr.open("PUT", put_path);
+                xhr.send();
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        alert('PUT Succeeded');
+                        window.location.reload();
+                    }
+                    else alert('PUT failed with status code: ' + xhr.status);
+                }
+            }
+
+            let deleteBtnOnClick = () => {
+                let delete_path = document.getElementById("delete-path").value;
+                let xhr = new XMLHttpRequest();
+                xhr.open("DELETE", delete_path);
+                xhr.send();
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        alert('DELETE Succeeded');
+                        window.location.reload();
+                    }
+                    else alert('DELETE failed with status code: ' + xhr.status);
+                }
+            }
+        </script>
+    </body>
+</html>

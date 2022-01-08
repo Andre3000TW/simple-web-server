@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <style>
+            .container {
+                left: 0;
+                line-height: 200px;
+                margin-top: -150px;
+                position: absolute;
+                text-align: center;
+                top: 40%;
+                width: 100%;
+                font-size: 50px;
+                font-weight: bold;
+                font-family: 'Times New Roman', Times, serif;
+            }
+
+            .inside-container {
+                margin-left: 100px;
+                margin-right: 100px;
+                border: 2px solid black;
+                background-color: darkgray;
+            }
+
+            input[type=text],
+            input[type=password] {
+                width: 500px;
+                height: 50px;
+                font-size: 50px;
+                font-family: 'Times New Roman', Times, serif;
+            }
+
+            #btn {
+                border: 2px solid black;
+                width: 250px;
+                height: 60px;
+                font-size: 50px;
+                font-family: 'Times New Roman', Times, serif;
+                background: -o-linear-gradient(top, #f4f4f4 1%, #ededed 100%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="inside-container">
+                <label for="un">Username:</label>
+                <input type="text" id="un" name="username" placeholder="Enter Username"><br>
+                <label for="pw">Password:</label>
+                <input type="password" id="pw" name="password" placeholder="Enter Password"><br>
+                <button id="btn" onclick="onClick()">Submit</button>
+            </div>
+        </div>
+        <script>
+            document.getElementById("un").addEventListener("keyup", (event) => {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("btn").click();
+                }
+            });
+
+            document.getElementById("pw").addEventListener("keyup", (event) => {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("btn").click();
+                }
+            });
+
+            let onClick = () => {
+                let username = document.getElementById("un").value;
+                let password = document.getElementById("pw").value;
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "login.html");
+                xhr.send("username=" + username + "&" + "password=" + password);
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) window.location.href = 'index.html';
+                    else alert('Authentication failed with status code: ' + xhr.status);
+                }
+            }
+        </script>
+    </body>
+</html>
